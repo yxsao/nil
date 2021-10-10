@@ -1,0 +1,15 @@
+syntax = "proto3";    //版本号
+
+package go.micro.service.ysnew;   //包名
+
+service Ys_server {     //定义的服务
+  rpc SayHello(SayInfo) returns (ReInfo){}
+}
+
+message SayInfo {     //消息的格式
+  string mess = 1;
+}
+
+message ReInfo {
+  string rmess = 1;
+}
