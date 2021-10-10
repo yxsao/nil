@@ -5,7 +5,8 @@ import (
 
 	log "github.com/micro/micro/v3/service/logger"
 
-	user "user/proto"
+	//user "user/proto"
+	user "github.com/yxsao/nil/tree/master/newmicro/user/proto"
 )
 
 type User struct{}
