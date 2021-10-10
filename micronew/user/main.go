@@ -1,7 +1,7 @@
 package main
 
 import (
-	"micronew/handler"
+	"user/handler"
 	pb "user/proto"
 
 	"github.com/micro/micro/v3/service"
