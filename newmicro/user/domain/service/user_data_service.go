@@ -20,19 +20,17 @@ type UserDataService struct {
 	UserRepository repository.IUserRepository
 }
 
-//创建实例
+// NewUserDataService 创建实例
 func NewUserDataService(userRepository repository.IUserRepository) IuserDataService {
 	return &UserDataService{UserRepository: userRepository}
 }
 
-//加密用户密码
-
+// GeneratePassword 加密用户密码
 func GeneratePassword(userPassword string) ([]byte, error) {
 	return bcrypt.GenerateFromPassword([]byte(userPassword), bcrypt.DefaultCost)
 }
 
-//验证用户密码
-
+// ValidatePassword 验证用户密码
 func ValidatePassword(userPassword string, hashed string) (isOk bool, err error) {
 	if err = bcrypt.CompareHashAndPassword([]byte(hashed), []byte(userPassword)); err != nil {
 		return false, errors.New("密码比对错误")
@@ -40,8 +38,7 @@ func ValidatePassword(userPassword string, hashed string) (isOk bool, err error)
 	return true, nil
 }
 
-//插入用户
-
+// AddUser 插入用户
 func (u *UserDataService) AddUser(user *model.User) (userID int64, err error) {
 	pwdByte, err := GeneratePassword(user.HashPassword)
 	if err != nil {
@@ -51,12 +48,12 @@ func (u *UserDataService) AddUser(user *model.User) (userID int64, err error) {
 	return u.UserRepository.CreatUser(user)
 }
 
-//删除用户
+// DeleteUser 删除用户
 func (u *UserDataService) DeleteUser(userID int64) error {
 	return u.UserRepository.DeleteUserByID(userID)
 }
 
-//更新用户
+// UpdateUser 更新用户
 func (u *UserDataService) UpdateUser(user *model.User, isChangePwd bool) (err error) {
 	//判断是否更新了密码
 	if isChangePwd {
@@ -69,7 +66,7 @@ func (u *UserDataService) UpdateUser(user *model.User, isChangePwd bool) (err er
 	return u.UserRepository.UpdateUser(user)
 }
 
-//根据用户名称查找用户信息
+// FindUserByName 根据用户名称查找用户信息
 func (u *UserDataService) FindUserByName(userName string) (user *model.User, err error) {
 	return u.UserRepository.FindUserByName(userName)
 }
