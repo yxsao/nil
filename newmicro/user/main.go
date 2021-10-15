@@ -4,8 +4,8 @@ import (
 	"github.com/yxsao/nil/tree/master/newmicro/user/handler"
 	pb "github.com/yxsao/nil/tree/master/newmicro/user/proto"
 
-	"github.com/micro/micro/v3/service"
-	"github.com/micro/micro/v3/service/logger"
+	"github.com/micro/micro/v2/service"
+	"github.com/micro/micro/v2/service/logger"
 )
 
 func main() {
