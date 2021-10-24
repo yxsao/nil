@@ -13,7 +13,7 @@ type IuserDataService interface {
 	DeleteUser(int64) error
 	UpdateUser(user *model.User, ischangPwd bool) (err error)
 	FindUserByName(string) (*model.User, error)
-	checkPwd(userName string, pwd string) (isOk bool, err error)
+	CheckPwd(userName string, pwd string) (isOk bool, err error)
 }
 
 type UserDataService struct {
@@ -71,8 +71,8 @@ func (u *UserDataService) FindUserByName(userName string) (user *model.User, err
 	return u.UserRepository.FindUserByName(userName)
 }
 
-//比对账号密码是否正确
-func (u *UserDataService) checkPwd(userName string, pwd string) (isOk bool, err error) {
+// CheckPwd 比对账号密码是否正确
+func (u *UserDataService) CheckPwd(userName string, pwd string) (isOk bool, err error) {
 	user, err := u.UserRepository.FindUserByName(userName)
 	if err != nil {
 		return false, err
